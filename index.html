@@ -3,107 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فيديو ريلز مع تخصيص الأزرار</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.css" />
+    <title>الأسئلة العشوائية</title>
     <style>
-        /* تخصيص الأبعاد لتناسب مقاس الريلز */
-        .plyr__video-wrapper {
-            width: 100%;
-            max-width: 500px;
-            height: 900px;
-            background-color: #000000;
-            margin-bottom: 20px;
-            position: relative;
-        }
+        /* استيراد خط حديث */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
+        /* تنسيق عام للصفحة */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 88vh;
-            overflow: hidden;
-            flex-direction: column;
-        }
-
-        #player {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        /* رفع جميع عناصر التحكم بمقدار 10px */
-        .plyr__controls {
-    transform: translateY(-20px); /* رفع الأزرار بمقدار 10px */
-}
-        .plyr__progress,
-        .plyr__volume {
-            transform: translateY(-00px);
-        }
-
-        /* تخصيص الأزرار */
-        .plyr__control {
-            background-color: #69535c !important;
-            color: #e3af5e !important;
-            border-radius: 50%;
-            z-index: 2 !important;
-        }
-
-        .plyr__control:hover {
-            background-color: #4e3d44 !important;
-            color: #cc9b4d !important;
-        }
-
-        /* تخصيص زر الرابط أسفل الفيديو */
-        .link-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #69535c;
-            color: #e3af5e;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #6d5963, #6d5963);
+            color: #fff;
             text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-top: -130px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            z-index: 3;
-            transform: translateX(0px) translateY(-15px);
+            padding: 20px;
         }
 
-        .link-button:hover {
-            background-color: #4e3d44;
-            transform: translateX(0PX) translateY(-20PX);
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #6d5963;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 8px 8px 16px #e3af5e, -8px -8px 16px #e3af5e;
+            backdrop-filter: blur(10px);
         }
-        @media (max-width: 768px) {
-    .plyr__video-wrapper {
-        height: 90vh;
-        margin-top: -00vh; /* رفع الفيديو للأعلى */
-    }
-}
 
+        h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #e3af5e;
+        }
+
+        /* تصميم السؤال */
+        .question {
+            background: #ffe6b4;
+            color: #6d5963;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 4px 4px 8px #1a1a23, -4px -4px 8px #404056;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .question:hover {
+            background: #3A3A4E;
+            transform: scale(1.02);
+        }
+
+        /* تصميم الإجابة */
+        .answer {
+            display: none;
+            padding: 12px;
+            background: #252532;
+            border-left: 4px solid #FFD700;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-align: right;
+            font-size: 16px;
+            transition: all 0.4s ease-in-out;
+            box-shadow: inset 4px 4px 8px #1a1a23, inset -4px -4px 8px #404056;
+        }
+
+        /* أيقونة الدوران */
+        .question span {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="plyr__video-wrapper">
-        <video id="player" controls>
-            <source src="تصميم بدون عنوان.mp4" type="video/mp4">
-            متصفحك لا يدعم الفيديو.
-        </video>
+    <div class="container">
+        <h2>الأسئلة المتكررة</h2>
+
+        <div class="question" onclick="toggleAnswer(1)"> سؤال 1 <span>▼</span></div>
+        <div class="answer" id="answer1">✔️ هذا هو الجواب .</div>
+
+        <div class="question" onclick="toggleAnswer(2)"> سؤال 2 <span>▼</span></div>
+        <div class="answer" id="answer2">✔️ هذا هو الجواب .</div>
+
+        <div class="question" onclick="toggleAnswer(3)"> سؤال 3 <span>▼</span></div>
+        <div class="answer" id="answer3">✔️ هذا هو الجواب .</div>
+
+        <div class="question" onclick="toggleAnswer(4)"> سؤال 4 <span>▼</span></div>
+        <div class="answer" id="answer4">✔️هذا هو الجواب.</div>
+
+        <div class="question" onclick="toggleAnswer(5)"> سؤال 5 <span>▼</span></div>
+        <div class="answer" id="answer5">✔️هذا هو الجواب .</div>
     </div>
 
-    <a href="https://drzaidshakir.com/home1" class="link-button" target="_blank">Back to home</a>
+           <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/67becd262da7081909f2b80d/1il0lcvbt';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    <!--End of Tawk.to Script-->
+    
+        function toggleAnswer(id) {
+            var answer = document.getElementById("answer" + id);
+            var icon = document.querySelector(".question:nth-child(" + (id * 2 - 1) + ") span");
 
-    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.3/dist/plyr.polyfilled.js"></script>
-    <script>
-        const player = new Plyr('#player');
+            if (answer.style.display === "none" || answer.style.display === "") {
+                answer.style.display = "block";
+                icon.classList.add("rotate");
+            } else {
+                answer.style.display = "none";
+                icon.classList.remove("rotate");
+            }
+        }
     </script>
 
 </body>
